@@ -1,0 +1,59 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+class LinkedList{
+    ListNode head;
+    ListNode tail;
+    int length;
+    class ListNode{
+        int data;
+        ListNode next;
+        ListNode(int val){
+            this.data=val;
+            this.next=null;
+        }
+    }
+    public void add(int val){
+        ListNode newNode=new ListNode(val);
+        if(head==null){
+            head=newNode;
+            tail=newNode;
+        }
+        else{
+            tail.next=newNode;
+            tail=newNode;
+        }
+        length++;
+    }
+    public boolean remove(int val){
+        if(head==null) return false;
+        if(head.data==val) {
+            head=head.next;
+            length--;
+            return true;
+        }
+        ListNode temp=head.next;
+        ListNode prev=head;
+        while(temp!=null){
+            if(temp.data==val){
+                prev.next=temp.next;
+                temp.next=null;
+                length--;
+                return true;
+            }
+            temp=temp.next;
+        }
+        return false;
+        
+    }
+}
+class Main {
+    public static void main(String[] args) {
+        System.out.println("Try programiz.pro");
+        LinkedList ll=new LinkedList();
+        ll.add(2);
+        ll.add(3);
+        ll.add(3);
+        ll.remove(3);
+        System.out.println(ll.length);
+    }
+}
