@@ -1,0 +1,90 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+class LinkedList{
+    Node head;
+    Node tail;
+    int length;
+    class Node{
+        int data;
+        Node next;
+        Node prev;
+        Node(int val){
+            data=val;
+            next=null;
+            prev=null;
+        }
+    }
+    public void add(int val){
+        Node newNode=new Node(val);
+        if(head==null){
+            head=tail=newNode;
+        }
+        else{
+            tail.next=newNode;
+            newNode.prev=tail;
+            tail=newNode;
+        }
+        length++;
+    }
+    public boolean remove(int val){
+        if(head==null) return false;
+        if(head.data==val){
+            if(head==tail){
+                head=tail=null;
+            }
+            else{
+                head=head.next;
+                head.prev=null;
+            }
+            length--;
+            return true;
+        }
+        Node temp=head.next;
+        while(temp!=null){
+            if(temp.data==val){
+                if(temp==tail){
+                    tail=temp.prev;
+                    tail.next=null;
+                }
+                else{
+                    temp.prev.next=temp.next;
+                    temp.next.prev=temp.prev;
+                }
+                temp.next=null;
+                temp.prev=null;
+                length--;
+                return true;
+            }
+            temp=temp.next;
+        }
+        return false;
+    }
+    public boolean isEmpty(){
+        return head==null;
+    }
+    public int size(){
+        return length;
+    }
+    public void print(){
+        Node temp=head;
+        while(temp!=null){
+             System.out.println(temp.data);
+             temp=temp.next;
+        }
+    }
+}
+class Main {
+    public static void main(String[] args) {
+        LinkedList ll =new LinkedList();
+         System.out.println(ll.isEmpty());
+        ll.add(1);
+        ll.add(2);
+        ll.remove(1);
+        ll.add(1);
+        ll.add(2);
+        System.out.println(ll.isEmpty());
+         System.out.println(ll.size());
+         ll.print();
+        
+    }
+}
